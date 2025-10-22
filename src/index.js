@@ -15,6 +15,10 @@ app.use(express.json());
 
 connectDB();
 
+app.get("/", (req, res) => {
+  res.send("Servidor Express activo en Vercel 🚀");
+});
+
 app.use("/api/products", productRoutes);
 app.use("/api/sales", salesRoutes);
 app.use("/api/sales-summary", salesSummaryRoutes);

@@ -10,7 +10,24 @@ import productSalesRoutes from "./routes/productSales.js";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  "https://neds-stock-client-9mo9.vercel.app",
+  "http://localhost:3000"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true
+  })
+);
 app.use(express.json());
 
 connectDB();
